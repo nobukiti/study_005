@@ -1,0 +1,283 @@
+$headerHeight: 50px;
+$noticeHeight: 150px;
+$contentsHeight: 100%;
+// $toolBoxHeight: 500px;
+$footerHeight: 200px;
+
+$headerWidth: 100%;
+$contentsWidth : 1100px;
+$noticeWidth: $contentsWidth;
+$toolBoxWidth: 100px;
+$blankWidth: 100px;
+
+// ロゴ画像サイズ
+$logoHeight: 50px;
+$logoWidth: 150px;
+
+// アイコン画像サイズ
+$iconSize: 150px;
+
+// Colors
+$tableHeaderColor: paleturquoise;
+$selectColor: linen;
+
+@mixin display_flex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "M PLUS Rounded 1c";
+}
+
+#container {
+  display: grid;
+  grid-template-rows: $headerHeight $noticeHeight $contentsHeight $footerHeight;
+  grid-template-columns: $toolBoxWidth $contentsWidth 1fr;
+  // grid-template-columns: 1fr $contentsWidth 1fr;
+  // grid-template-columns: $blankWidth $contentsWidth $blankWidth;
+  // grid-template-columns: $blankWidth 1fr $blankWidth;
+  grid-template-areas:
+    "header  header   header"
+    // "...... notice   ......"
+    // "...... contents ......"
+    "toolbox notice   ......"
+    "toolbox contents ......"
+    "footer  footer   footer" 
+}
+
+// header開始
+#site_header {
+  grid-area: header;
+  background-color: white;
+  // 固定化
+  position: fixed;
+  width: $headerWidth;
+  z-index: 100;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 100);
+  font-size: 16px;
+
+  ul {
+    // 子要素のliを横並び
+    display: flex;
+    // ulそのものをヘッダー領域に対して中央揃え
+    justify-content: center;
+    list-style: none;
+    // ul全体を中央寄せ
+    margin: 0 auto;
+    padding: 0;
+
+    .site_logo {
+      background-color: white;
+      height: $logoHeight;
+      width: $logoWidth;
+      background-image: url(/images/logo_03.png);
+      background-position: center;
+      background-size: 10em;
+      background-repeat: no-repeat;
+    }
+
+    li {
+      // 複数指定したい場合は以下のような書き方もあり
+      // &:nth-child(2) ,
+      // &:nth-child(3) {
+      // 2-4番目の要素を指定
+
+      a {
+        text-decoration: none;
+        color: #3366ff;
+        font-weight: bold;
+        
+        //中央揃え
+        @include display_flex();
+
+        // 高さを持たせる事でli全体をクリック可能領域にする
+        height: 100%;
+        width: 100%;
+
+        &:hover {
+          color: blue;
+          background-color: #ccffff;
+        }
+      }
+      // マイページ〜問題投稿
+      &:nth-child(n+2):nth-child(-n+4) {
+        flex-basis: 150px;
+        background-color: white;
+      }
+      // 検索ボックス(li要素) 
+      &:nth-child(5) {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        div {
+          @include display_flex();
+          flex-basis: 200px;
+
+          .search {
+            &_box {
+              padding: 0;
+              border-radius: 15px;
+              &:focus {
+                outline: none;
+              }
+              &::placeholder {
+                text-align: center;
+              }
+            }
+            &_button {
+              padding: 10px;
+              border: double 3px #ccffff;
+              border-radius: 15px;
+              background-color: #ccccff;
+              width: 30px;
+              height: 30px;
+              background-image: url(/images/search_01.png);
+              background-size: 1.3em;
+              background-position: center;
+              background-repeat: no-repeat;
+              &:focus {
+                outline: none;
+              }
+              &:hover {
+                background-color: #5fc2f5;
+              }
+            }
+          }
+        }
+      }
+      &:nth-child(6) {
+        @include display_flex();
+        flex-basis: 150px;
+        background-color: white;
+        .my_icon {
+          // @include display_flex();
+          display: inline-block;
+          border: solid 1px #bbb;
+          border-radius: 100px;
+          height: ($iconSize * 0.2);
+          width: ($iconSize* 0.2);
+          background-image: url(/images/スライム.jpeg);
+          background-position: center;
+          background-size: ($iconSize * 0.21);
+          background-repeat: no-repeat;
+        }
+        span {
+          color: #3366ff;
+          border-bottom: dashed 1px blue;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+#notice {
+  grid-area: notice;
+  margin: 20px;
+  background-color: red;
+}
+
+#toolbox {
+  grid-area: toolbox;
+  background-color: blue;
+
+  .tool {
+    display: flex;
+    position: sticky;
+    top: $headerHeight;
+    height: 300px;
+    width: 70px;
+    background-color: yellow;
+  }
+}
+
+#contents {
+  grid-area: contents;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  // align-content: stretch;
+  align-content: flex-start;
+
+  .item {
+    $itemMargin: 10px;
+    width: ($contentsWidth - $itemMargin * 6) / 3;
+    margin: $itemMargin;
+    align-self: flex-start;
+    background-color: snow;
+    
+    &  > h1 {
+      margin: 0;
+      color: #6cb4e4;
+      text-align: center;
+      padding: 0.25em;
+      border-top: solid 2px #6cb4e4;
+      border-bottom: solid 2px #6cb4e4;
+      background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+      background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+
+      .question {
+        width: 250px;
+        padding: 10px 0;
+        text-align: center;
+        background-color: $tableHeaderColor;
+        // padding-left: 10px;
+      }
+
+      .level {
+        text-align: center;
+        background-color: $tableHeaderColor;
+      }
+
+      tr{
+        width: 100%;
+        border-bottom: solid 1px $selectColor;
+      }
+      
+      .pointer:hover {
+          background-color: $selectColor;
+          cursor: pointer;
+      }
+
+      td {
+        text-align: left;
+        // text-align: center;
+        // padding-left: 10px;
+        padding: 10px 0 10px 10px;
+      }
+      // .good {
+      //   width: 100px;
+      //   height: 100px;
+      //   background: url(http://nelog.jp/wp-content/uploads/2016/03/heart_animation.png) no-repeat;
+      //   background-position: 0 0;
+      //   // background-image: url(/images/good.png);
+      //   // background-size: 1em;
+      //   // background-position: center;
+      //   // background-repeat: no-repeat;
+
+      //   &:hover {
+      //     background-position: -2800px 0;
+      //     -webkit-transition: background 1s steps(28);
+      //     transition: background 1s steps(28);
+      //     cursor: pointer;
+      //   }
+      // }
+    }
+  }
+}
+
+#footer {
+  grid-area: footer;
+  background-color: peru;
+}

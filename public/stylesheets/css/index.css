@@ -1,0 +1,197 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "M PLUS Rounded 1c";
+}
+
+#container {
+  display: grid;
+  grid-template-rows: 50px 150px 100% 200px;
+  grid-template-columns: 100px 1100px 1fr;
+  grid-template-areas: "header  header   header" "toolbox notice   ......" "toolbox contents ......" "footer  footer   footer";
+}
+
+#site_header {
+  grid-area: header;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 0 4px black;
+  font-size: 16px;
+}
+#site_header ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+#site_header ul .site_logo {
+  background-color: white;
+  height: 50px;
+  width: 150px;
+  background-image: url(/images/logo_03.png);
+  background-position: center;
+  background-size: 10em;
+  background-repeat: no-repeat;
+}
+#site_header ul li a {
+  text-decoration: none;
+  color: #3366ff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+#site_header ul li a:hover {
+  color: blue;
+  background-color: #ccffff;
+}
+#site_header ul li:nth-child(n+2):nth-child(-n+4) {
+  flex-basis: 150px;
+  background-color: white;
+}
+#site_header ul li:nth-child(5) {
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+#site_header ul li:nth-child(5) div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 200px;
+}
+#site_header ul li:nth-child(5) div .search_box {
+  padding: 0;
+  border-radius: 15px;
+}
+#site_header ul li:nth-child(5) div .search_box:focus {
+  outline: none;
+}
+#site_header ul li:nth-child(5) div .search_box::placeholder {
+  text-align: center;
+}
+#site_header ul li:nth-child(5) div .search_button {
+  padding: 10px;
+  border: double 3px #ccffff;
+  border-radius: 15px;
+  background-color: #ccccff;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/search_01.png);
+  background-size: 1.3em;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#site_header ul li:nth-child(5) div .search_button:focus {
+  outline: none;
+}
+#site_header ul li:nth-child(5) div .search_button:hover {
+  background-color: #5fc2f5;
+}
+#site_header ul li:nth-child(6) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 150px;
+  background-color: white;
+}
+#site_header ul li:nth-child(6) .my_icon {
+  display: inline-block;
+  border: solid 1px #bbb;
+  border-radius: 100px;
+  height: 30px;
+  width: 30px;
+  background-image: url(/images/スライム.jpeg);
+  background-position: center;
+  background-size: 31.5px;
+  background-repeat: no-repeat;
+}
+#site_header ul li:nth-child(6) span {
+  color: #3366ff;
+  border-bottom: dashed 1px blue;
+  margin-left: 10px;
+}
+
+#notice {
+  grid-area: notice;
+  margin: 20px;
+  background-color: red;
+}
+
+#toolbox {
+  grid-area: toolbox;
+  background-color: blue;
+}
+#toolbox .tool {
+  display: flex;
+  position: sticky;
+  top: 50px;
+  height: 300px;
+  width: 70px;
+  background-color: yellow;
+}
+
+#contents {
+  grid-area: contents;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+#contents .item {
+  width: 346.6666666667px;
+  margin: 10px;
+  align-self: flex-start;
+  background-color: snow;
+}
+#contents .item > h1 {
+  margin: 0;
+  color: #6cb4e4;
+  text-align: center;
+  padding: 0.25em;
+  border-top: solid 2px #6cb4e4;
+  border-bottom: solid 2px #6cb4e4;
+  background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px, #e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px, #e9f4ff 3px, #e9f4ff 7px);
+}
+#contents .item table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+#contents .item table .question {
+  width: 250px;
+  padding: 10px 0;
+  text-align: center;
+  background-color: paleturquoise;
+}
+#contents .item table .level {
+  text-align: center;
+  background-color: paleturquoise;
+}
+#contents .item table tr {
+  width: 100%;
+  border-bottom: solid 1px linen;
+}
+#contents .item table .pointer:hover {
+  background-color: linen;
+  cursor: pointer;
+}
+#contents .item table td {
+  text-align: left;
+  padding: 10px 0 10px 10px;
+}
+
+#footer {
+  grid-area: footer;
+  background-color: peru;
+}
+
+/*# sourceMappingURL=index.css.map */
